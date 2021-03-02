@@ -39,6 +39,7 @@ const ColorPallete = () => {
       style={{ backgroundColor: bgColor, height: '100vh' }}
     >
       <h1>Color Pallete</h1>
+
       <div className='containerr'>
         {colors.map((item) => (
           <CopyToClipboard text={copyColor}>
