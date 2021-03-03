@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 const ColorPallete = () => {
   const [bgColor, setBgColor] = useState('')
@@ -25,41 +25,45 @@ const ColorPallete = () => {
   ]
   const hoverHandler = (color) => {
     setBgColor(color)
+    document.body.style.backgroundColor = bgColor
   }
   const onClickHandler = (color) => {
     setCopyColor(color)
     setIsDisplay(true)
-    const timeout = setTimeout(() => {
+    setTimeout(() => {
       setIsDisplay(false)
     }, 2000)
   }
   return (
-    <div
-      className='mainContainer'
-      style={{ backgroundColor: bgColor, height: '100vh' }}
-    >
-      <h1>Color Pallete</h1>
-
-      <div className='containerr'>
-        {colors.map((item) => (
-          <CopyToClipboard text={copyColor}>
-            <div
-              onClick={() => onClickHandler(item)}
-              onMouseOver={() => hoverHandler(item)}
-              style={{ backgroundColor: item }}
-              className='colorPallete'
+    <div>
+      <div className='container'>
+        <div style={{ marginTop: '7rem' }} className='row'>
+          <h1 className='col-4'>Color Pallete</h1>
+          <div
+            style={{ display: isDisplay ? 'block' : 'none' }}
+            className='alert alert-secondary col-4 text-center'
+            role='alert'
+          >
+            {copyColor} copied to clipboard!
+          </div>
+        </div>
+        <div className='row mx-auto'>
+          {colors.map((item, index) => (
+            <CopyToClipboard
+              key={index}
+              text={copyColor}
+              className='col-xs-12 col-md-2 m-3 p-5 colorPallete'
             >
-              {item}
-            </div>
-          </CopyToClipboard>
-        ))}
-      </div>
-      <div
-        style={{ display: isDisplay ? 'block' : 'none' }}
-        class='alert alert-secondary col-4 mx-auto text-center'
-        role='alert'
-      >
-        {copyColor} copied to clipboard!
+              <div
+                onClick={() => onClickHandler(item)}
+                onMouseOver={() => hoverHandler(item)}
+                style={{ backgroundColor: item }}
+              >
+                {item}
+              </div>
+            </CopyToClipboard>
+          ))}
+        </div>
       </div>
     </div>
   )
