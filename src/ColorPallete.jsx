@@ -31,30 +31,36 @@ const ColorPallete = () => {
     setIsDisplay(true)
     setTimeout(() => {
       setIsDisplay(false)
-    }, 2000)
+    }, 6000)
   }
   useEffect(() => {
     document.body.style.backgroundColor = bgColor
   }, [bgColor])
   return (
     <div>
-      <div className='container'>
+      <div className='container  text-center'>
+        {/* Title and Invisible Alert */}
         <div style={{ marginTop: '7rem' }} className='row'>
           <h1 className='col-4'>Color Pallete</h1>
-          <div
-            style={{ display: isDisplay ? 'block' : 'none' }}
-            className='alert alert-secondary col-4 text-center'
-            role='alert'
-          >
-            {copyColor} copied to clipboard!
+          <div className='col-4' style={{ position: 'relative' }}>
+            <div
+              style={{ display: isDisplay ? 'block' : 'none' }}
+              className='alert alert-secondary  text-center'
+              role='alert'
+            >
+              {copyColor} copied to clipboard!
+            </div>
           </div>
         </div>
-        <div className='row mx-auto'>
+
+        {/* Parent for individual item */}
+        <div className='row'>
+          {/* Indiviual Item */}
           {colors.map((item, index) => (
             <CopyToClipboard
               key={index}
               text={copyColor}
-              className='col-xs-12 col-md-2 m-3 p-5 colorPallete'
+              className='col-xs-12 mx-2 my-2 col-md-2 col-lg-2 p-5 colorPallete'
             >
               <div
                 onClick={() => onClickHandler(item)}
