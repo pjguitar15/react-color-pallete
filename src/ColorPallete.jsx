@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 const ColorPallete = () => {
   const [bgColor, setBgColor] = useState('')
@@ -25,7 +25,6 @@ const ColorPallete = () => {
   ]
   const hoverHandler = (color) => {
     setBgColor(color)
-    document.body.style.backgroundColor = bgColor
   }
   const onClickHandler = (color) => {
     setCopyColor(color)
@@ -34,6 +33,9 @@ const ColorPallete = () => {
       setIsDisplay(false)
     }, 2000)
   }
+  useEffect(() => {
+    document.body.style.backgroundColor = bgColor
+  }, [bgColor])
   return (
     <div>
       <div className='container'>
